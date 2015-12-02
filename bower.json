@@ -1,0 +1,29 @@
+{
+  "name": "Projects",
+  "version": "0.0.0",
+  "description": "express test",
+  "main": "",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "dependences"
+  ],
+  "authors": [
+    "Frank"
+  ],
+  "license": "MIT",
+  "homepage": "null",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4",
+    "moment": "~2.10.6"
+  }
+}

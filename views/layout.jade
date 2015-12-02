@@ -1,0 +1,11 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        title #{title}
+        include ./include/style
+    body
+        include ./include/header
+        block content
+        include ./include/script
+        block script
