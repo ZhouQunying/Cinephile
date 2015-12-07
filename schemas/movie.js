@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var MovieSchema = new mongoose.Schema({
+var MovieSchema = new Schema({
 	title: String,
 	// _id: Number,
 	summary: String,
@@ -17,6 +18,7 @@ var MovieSchema = new mongoose.Schema({
 })
 
 MovieSchema.pre('save', function (next) {
+	// this amount to MovieSchema
 	if(this.isNew) {
 		this.meta.createAt = this.meta.updateAt = Date.now();
 	}

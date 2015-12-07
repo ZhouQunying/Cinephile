@@ -6,8 +6,8 @@ block content
 			each item in movie
 				.col-md-2
 					.thumbnail
-						a(herf="/detail/#{item._id}")
+						a(herf="/movie/detail/#{item._id}")
 							img(src="", alt="#{item.title}")
 						.coaption
 							h3 #{item.title}
-							p: a.btn.btn-primary(href="detail/#{item._id}", role="button") 观看预告片
+							p: a.btn.btn-primary(href="/movie/detail/#{item._id}", role="button") 观看预告片
