@@ -10,7 +10,7 @@ block content
                         th 录入时间
                         th 更新时间
                 tbody
-                each item in user
+                each item in users
                     tr(class="item-id-#{item._id}")
                         td #{item.name}
                         td #{moment(item.meta.createAt).format('MM/DD/YYYY')}
