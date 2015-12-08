@@ -13,7 +13,7 @@ var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.listen(port);
-app.set('views', '../app/views/pages');
+app.set('views', './app/views/pages');
 app.set('view engine', 'jade');
 console.log('Process running in:' + port);
 
