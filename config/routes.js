@@ -15,19 +15,19 @@ module.exports = function(app, urlencodedParser) {
     // index
     app.get('/', Index.index);
 
-    // movie
-    app.get('/movie/list', Movie.list);
-    app.get('/movie/detail/:id', Movie.detail);
-    app.get('/admin/movie/add', Movie.add);
-    app.get('/admin/movie/update/:id', Movie.update);
-    app.post('/admin/movie/new', urlencodedParser, Movie.save);
-    app.delete('/admin/movie/delete', Movie.del);
-
     // user
-    app.get('/user/list', User.list);
-    app.get('/signin', User.signin);
-    app.get('/signup', User.signup);
-    app.get('/logout', User.logout);
+    app.get('/signin/page', User.signin);
+    app.get('/signup/page', User.signup);
+    app.get('/logout/page', User.logout);
     app.post('/admin/signin', urlencodedParser, User.adminSignin);
     app.post('/admin/signup', urlencodedParser, User.adminSignup);
+    app.get('/admin/user/list', User.signinRequire, User.adminRequire, User.list);
+
+    // movie
+    app.get('/movie/detail/:id', Movie.detail);
+    app.get('/admin/movie/list', User.signinRequire, User.adminRequire, Movie.list);
+    app.get('/admin/movie/add', User.signinRequire, User.adminRequire, Movie.add);
+    app.get('/admin/movie/update/:id', User.signinRequire, User.adminRequire, Movie.update);
+    app.post('/admin/movie/new', urlencodedParser, User.signinRequire, User.adminRequire, Movie.save);
+    app.delete('/admin/movie/delete', User.signinRequire, User.adminRequire, Movie.del);
 }

@@ -51,18 +51,19 @@ exports.adminSignin = function (req, res) {
                     res.redirect('/');
                 }
                 else {
-                    res.redirect('/signin');
+                    res.redirect('/signin/page');
                 }
             })
         }
         else {
-            res.redirect('/signup');
+            res.redirect('/signup/page');
         }
     })
 }
 
 exports.adminSignup = function (req, res) {
     var _user = req.body;
+    console.log(_user.name)
 
     User.findOne({name: _user.name}, function (err, user) {
         if(err) {
@@ -70,7 +71,7 @@ exports.adminSignup = function (req, res) {
         }
 
         if(user) {
-            res.redirect('/signin');
+            res.redirect('/signin/page');
         }
         else {
             user = new User(_user);
@@ -79,8 +80,28 @@ exports.adminSignup = function (req, res) {
                     console.log(err);
                 }
 
-                res.redirect('/user/list');
+                res.redirect('/admin/user/list');
             })
         }
     })
+}
+
+exports.signinRequire = function (req, res, next) {
+    var user = req.session.user;
+
+    if(!user) {
+        res.redirect('/signin/page');
+    }
+
+    next();
+}
+
+exports.adminRequire = function (req, res, next) {
+    var user = req.session.user;
+
+    // if(user.role <= 10) {
+    //     res.redirect('/signin/page');
+    // }
+
+    next();
 }
