@@ -1,0 +1,16 @@
+extend ../layout
+
+block content
+    .container
+        .row
+            .col-md-5
+                form(method="POST", action="/admin/signin")
+                    .modal-body
+                        .form-group
+                            label(for="signinName") 用户名
+                            input#signinName.form-control(name="name", type="text")
+                        .form-group
+                            label(for="signinPassword") 密码
+                            input#siginPassword.form-control(name="password", type="password")       
+                    .modal-footer
+                        input.btn.btn-success(type="submit", value="登陆")

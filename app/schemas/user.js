@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
-var hash = bcrypt.hashSync("bacon");
+var hash = bcrypt.hashSync('bacon');
 var SALT_WORK_FACTOR = 10;
 
 var UserSchema = new Schema({

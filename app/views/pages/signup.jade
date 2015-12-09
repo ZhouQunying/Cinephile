@@ -1,0 +1,16 @@
+extend ../layout
+
+block content
+    .container
+        .row
+            .col-md-5
+                form(method="POST", action="/admin/signup")
+                    .modal-body
+                        .form-group
+                            label(for="signupName") 用户名
+                            input#signupName.form-control(name="name", type="text")
+                        .form-group
+                            label(for="signupPassword") 密码
+                            input#signupPassword.form-control(name="password", type="password")
+                    .modal-footer
+                        input.btn.btn-success(type="submit", value="提交")

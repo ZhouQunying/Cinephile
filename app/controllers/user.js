@@ -14,6 +14,25 @@ exports.list = function (req, res) {
 }
 
 exports.signin = function (req, res) {
+    res.render('signin', {
+        title: '登陆页'
+    })
+}
+
+exports.signup = function (req, res) {
+    res.render('signup', {
+        title: '注册页'
+    })
+}
+
+exports.logout = function (req, res) {
+    delete req.session.user;
+    // delete app.locals.user;
+
+    res.redirect('/');
+}
+
+exports.adminSignin = function (req, res) {
     var _user = req.body;
 
     User.findOne({name: _user.name}, function (err, user) {
@@ -28,23 +47,21 @@ exports.signin = function (req, res) {
                 }
 
                 if(isMatch) {
-                    console.log('Password is matched!');
-
                     req.session.user = user;
                     res.redirect('/');
                 }
                 else {
-                    console.log('Password is not matched!');
+                    res.redirect('/signin');
                 }
             })
         }
         else {
-            console.log('User is not exit!');
+            res.redirect('/signup');
         }
     })
 }
 
-exports.signup = function (req, res) {
+exports.adminSignup = function (req, res) {
     var _user = req.body;
 
     User.findOne({name: _user.name}, function (err, user) {
@@ -53,10 +70,10 @@ exports.signup = function (req, res) {
         }
 
         if(user) {
-            res.redirect('/');
+            res.redirect('/signin');
         }
         else {
-            var user = new User(_user);
+            user = new User(_user);
             user.save(function (err, user) {
                 if(err) {
                     console.log(err);
@@ -66,11 +83,4 @@ exports.signup = function (req, res) {
             })
         }
     })
-}
-
-exports.logout = function (req, res) {
-    delete req.session.user;
-    // delete app.locals.user;
-
-    res.redirect('/');
 }

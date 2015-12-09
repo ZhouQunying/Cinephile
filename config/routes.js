@@ -25,7 +25,9 @@ module.exports = function(app, urlencodedParser) {
 
     // user
     app.get('/user/list', User.list);
-    app.post('/signin', urlencodedParser, User.signin);
-    app.post('/signup', urlencodedParser, User.signup);
+    app.get('/signin', User.signin);
+    app.get('/signup', User.signup);
     app.get('/logout', User.logout);
+    app.post('/admin/signin', urlencodedParser, User.adminSignin);
+    app.post('/admin/signup', urlencodedParser, User.adminSignup);
 }
