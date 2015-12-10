@@ -63,7 +63,6 @@ exports.adminSignin = function (req, res) {
 
 exports.adminSignup = function (req, res) {
     var _user = req.body;
-    console.log(_user.name)
 
     User.findOne({name: _user.name}, function (err, user) {
         if(err) {
