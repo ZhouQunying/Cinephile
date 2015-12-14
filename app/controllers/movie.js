@@ -1,5 +1,6 @@
 var _ = require('underscore');
 var Movie = require('../modules/movie');
+var Comment = require('../modules/comment');
 
 exports.list = function (req, res) {
     Movie.fetch(function (err, movie) {
@@ -18,10 +19,16 @@ exports.detail = function (req, res) {
     var id = req.params.id;
 
     Movie.findById(id, function (err, movie) {
-        res.render('moviedetail', {
-            title: '详情页',
-            movie: movie
-        })
+        Comment
+            .find({movie: id})
+            .populate('from', 'name')
+            .exec(function (err, comment) {
+                res.render('moviedetail', {
+                    title: '详情页',
+                    movie: movie,
+                    comment: comment
+                })
+            })
     })
 }
 
@@ -79,6 +86,7 @@ exports.save = function (req, res) {
             title: movieObj.title,
             summary: movieObj.summary
         })
+        // _movie = new Movie(movieObj);
 
         _movie.save(function (err, movie) {
             if(err) {

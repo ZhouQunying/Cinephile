@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var MovieSchema = new Schema({
+var movieSchema = new Schema({
 	title: String,
 	// _id: Number,
 	summary: String,
@@ -17,8 +17,8 @@ var MovieSchema = new Schema({
 	}
 })
 
-MovieSchema.pre('save', function (next) {
-	// this amount to MovieSchema
+movieSchema.pre('save', function (next) {
+	// this amount to movieSchema
 	if(this.isNew) {
 		this.meta.createAt = this.meta.updateAt = Date.now();
 	}
@@ -29,19 +29,19 @@ MovieSchema.pre('save', function (next) {
 	next();
 })
 
-MovieSchema.statics = {
-	fetch: function (cb) {
+movieSchema.statics = {
+	fetch: function(callback) {
 		return this
 			.find({})
 			.sort('meta.updateAt')
-			.exec(cb)
+			.exec(callback)
 	},
-	findById: function (id, cb) {
+	findById: function(id, callback) {
 		return this
 			.findOne({_id: id})
 			.sort('meta.updateAt')
-			.exec(cb)
+			.exec(callback)
 	}
 }
 
-module.exports = MovieSchema;
+module.exports = movieSchema;

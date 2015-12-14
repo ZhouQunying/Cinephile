@@ -4,7 +4,7 @@ var bcrypt = require('bcrypt-nodejs');
 var hash = bcrypt.hashSync('bacon');
 var SALT_WORK_FACTOR = 10;
 
-var UserSchema = new Schema({
+var userSchema = new Schema({
     name: {
         unique: true,
         type: String
@@ -22,8 +22,8 @@ var UserSchema = new Schema({
     }
 })
 
-UserSchema.pre('save', function (next) {
-    // this amount to UserSchema
+userSchema.pre('save', function (next) {
+    // this amount to userSchema
     if (this.isNew) {
         this.meta.createAt = this.meta.updateAt = Date.now();
     }
@@ -48,32 +48,32 @@ UserSchema.pre('save', function (next) {
     })
 })
 
-UserSchema.methods = {
-    comparePassword: function (_password, cb) {
+userSchema.methods = {
+    comparePassword: function(_password, callback) {
         var hashPassword = this.password;
         bcrypt.compare(_password, hashPassword, function (err, isMatch) {
             if(err) {
-                return cb(err);
+                return callback(err);
             }
 
-            cb(null, isMatch);
+            callback(null, isMatch);
         })
     }
 }
 
-UserSchema.statics = {
-    fetch: function (cb) {
+userSchema.statics = {
+    fetch: function(callback) {
         return this
             .find({})
             .sort('meta.updateAt')
-            .exec(cb)
+            .exec(callback)
     },
-    findById: function (id, cb) {
+    findById: function(id, callback) {
         return this
             .find({_id: id})
             .sort('meta.updateAt')
-            .exec(cb)
+            .exec(callback)
     }
 }
 
-module.exports = UserSchema;
+module.exports = userSchema;

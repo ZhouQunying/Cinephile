@@ -1,6 +1,7 @@
 var Index = require('../app/controllers/index');
 var Movie = require('../app/controllers/movie');
 var User = require('../app/controllers/user');
+var Comment = require('../app/controllers/comment');
 
 module.exports = function(app, urlencodedParser) {
 
@@ -30,4 +31,7 @@ module.exports = function(app, urlencodedParser) {
     app.get('/admin/movie/update/:id', User.signinRequire, User.adminRequire, Movie.update);
     app.post('/admin/movie/new', urlencodedParser, User.signinRequire, User.adminRequire, Movie.save);
     app.delete('/admin/movie/delete', User.signinRequire, User.adminRequire, Movie.del);
+
+    // comment
+    app.post('/user/comment', urlencodedParser, User.signinRequire, Comment.save);
 }
