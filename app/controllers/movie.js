@@ -21,8 +21,9 @@ exports.detail = function (req, res) {
     Movie.findById(id, function (err, movie) {
         Comment
             .find({movie: id})
-            .populate('from', 'name')
+            .populate('comment.name', 'user.name')
             .exec(function (err, comment) {
+                console.log(comment)
                 res.render('moviedetail', {
                     title: '详情页',
                     movie: movie,
