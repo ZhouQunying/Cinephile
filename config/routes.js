@@ -25,7 +25,7 @@ module.exports = function(app, urlencodedParser) {
     app.get('/admin/user/list', User.signinRequire, User.adminRequire, User.list);
 
     // movie
-    app.get('/movie/detail/:id', Movie.detail);
+    app.get('/movie/detail/:id', User.signinRequire, Movie.detail);
     app.get('/admin/movie/list', User.signinRequire, User.adminRequire, Movie.list);
     app.get('/admin/movie/add', User.signinRequire, User.adminRequire, Movie.add);
     app.get('/admin/movie/update/:id', User.signinRequire, User.adminRequire, Movie.update);

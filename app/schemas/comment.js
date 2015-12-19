@@ -4,7 +4,11 @@ var Schema = mongoose.Schema;
 var commentSchema = new Schema({
     movie: {type: Schema.Types.ObjectId, ref: 'Movie'},
     from: {type: Schema.Types.ObjectId, ref: 'User'},
-    to: {type: Schema.Types.ObjectId, ref: 'User'},
+    reply: [{
+        from: {type: Schema.Types.ObjectId, ref: 'User'},
+        to: {type: Schema.Types.ObjectId, ref: 'User'},
+        content: {type: String}
+    }],
     content: {type: String},
     meta: {
         createAt: {
