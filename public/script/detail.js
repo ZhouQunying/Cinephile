@@ -1,8 +1,8 @@
 $(function() {
     $('.comment').on('click', function() {
         var $this = $(this);
-        var commentId = $this.data('commentId');
-        var toId = $this.data('toId');
+        var commentId = $this.data('commentid');
+        var toId = $this.data('toid');
 
         if($('#commentId').length > 0) {
             $('#commentId').val(commentId);

@@ -1,16 +1,5 @@
 var Comment = require('../modules/comment');
 
-function saveComment(res, commentObj) {
-    var comment = new Comment(commentObj);
-    comment.save(function (err, comment) {
-        if(err)  {
-            console.log(err);
-        }
-
-        res.redirect('/movie/detail/' + commentObj.movie);
-    })
-}
-
 exports.save = function (req, res) {
     var commentObj = req.body;
 
@@ -23,11 +12,24 @@ exports.save = function (req, res) {
             }
 
             comment.reply.push(reply);
+            comment.save(function (err, comment) {
+                if(err)  {
+                    console.log(err);
+                }
 
-            saveComment(res, commentObj);
+                res.redirect('/movie/detail/' + commentObj.movie);
+            })
         })
     }
     else {
-        saveComment(res, commentObj);
+        var comment = new Comment(commentObj);
+
+        comment.save(function (err, comment) {
+            if(err)  {
+                console.log(err);
+            }
+
+            res.redirect('/movie/detail/' + commentObj.movie);
+        })
     }
 }

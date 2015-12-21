@@ -16,7 +16,7 @@ block content
                             each item in comment
                                 li.media
                                     .pull-left
-                                        a.comment(href="#comments", data-commentId="#{item._id}", data-toId="#{item.from._id}")
+                                        a.comment(href="#comments", data-commentid="#{item._id}", data-toid="#{item.from._id}")
                                             img.media-object(src="", alt="头像", style="width: 64px; height: 64px;")
                                     .media-body
                                         h4.media-heading #{item.from.name}
@@ -25,12 +25,12 @@ block content
                                             each reply in item.reply
                                                 .media
                                                     .pull-left
-                                                        a.comment(href="#comments", data-commentId="#{item._id}", data-toId="#{reply.from._id}")
+                                                        a.comment(href="#comments", data-commentid="#{item._id}", data-toid="#{reply.from._id}")
                                                             img.media-object(src="", alt="头像", style="width: 64px; height: 64px;")
                                                     .media-body
                                                         h4.media-heading #{reply.from.name}
                                                         p #{reply.content}
-                                    hr
+                                        hr
                 #comment
                     form#commentForm(method="POST", action="/user/comment")
                         input(type="hidden", name="movie", value="#{movie._id}")
