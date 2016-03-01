@@ -1,4 +1,4 @@
-# simpleMEAN
+# Cinephile
   Just a simple fullstack project.
 
 > Using MongoDB, Express, and Node, grunt for automate workflow, and bootstrap.
